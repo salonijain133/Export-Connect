@@ -142,20 +142,20 @@ const ExporterOrders = () => {
         <div className="max-w-7xl mx-auto">
           {/* Header Section */}
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
-          <div>
-            <h1 className="text-3xl font-bold text-blue-600">
-              Manage Orders
-            </h1>
-            <p className="text-slate-600 mt-1">Track and manage your export orders</p>
+            <div>
+              <h1 className="text-3xl font-bold text-blue-600">
+                Manage Orders
+              </h1>
+              <p className="text-slate-600 mt-1">Track and manage your export orders</p>
+            </div>
+            <div className="flex items-center gap-3 bg-blue-50 px-6 py-3 rounded-2xl">
+              <Building2 className="h-6 w-6 text-blue-600" />
+              <span className="text-blue-700 font-medium">
+                Exporter Dashboard
+              </span>
+            </div>
           </div>
-          <div className="flex items-center gap-3 bg-blue-50 px-6 py-3 rounded-2xl">
-                <Building2 className="h-6 w-6 text-blue-600" />
-                <span className="text-blue-700 font-medium">
-                  Exporter Dashboard
-                </span>
-              </div>
-        </div>
-          
+
 
           {/* Search Section */}
           <div className="mb-8">
@@ -273,10 +273,9 @@ const ExporterOrders = () => {
                             </h3>
                             <div className="flex gap-3">
                               <select
+                                ref={(el) => (order.shipperSelectRef = el)}
                                 className="flex-1 px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/70 backdrop-blur-sm shadow-sm text-lg"
-                                defaultValue={
-                                  order.trackingInfo.status || `pending`
-                                }
+                                defaultValue=""
                               >
                                 <option value="" disabled>
                                   Select a shipper
@@ -289,17 +288,15 @@ const ExporterOrders = () => {
                               </select>
                               <Button
                                 onClick={() => {
-                                  const select =
-                                    document.querySelector("select");
-                                  const shipperId = select.value;
+                                  const shipperId = order.shipperSelectRef?.value;
+
                                   if (shipperId) {
                                     handleAssignShipper(order._id, shipperId);
                                   } else {
                                     toast({
                                       variant: "destructive",
                                       title: "No Shipper Selected",
-                                      description:
-                                        "Please select a shipper to assign.",
+                                      description: "Please select a shipper to assign.",
                                     });
                                   }
                                 }}
