@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema({
   companyName: {
     type: String,
     required: function () {
-      return this.role === 'exporter' || this.role === 'shipper';
+      return this.role === 'exporter' ;
     }
   },
   companyDetails: {
