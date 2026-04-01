@@ -14,10 +14,7 @@ dotenv.config();
 const app = express();
 app.use(express.json()); // For parsing JSON data
 
-app.use(cors({
-  origin: process.env.FRONTEND_URI,
-  credentials: true
-}));
+app.use(cors());
 
 
 app.use('/api/auth', authRoutes);
